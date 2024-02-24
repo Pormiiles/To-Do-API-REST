@@ -3,14 +3,11 @@ package com.todosimple.todosimple.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.task.TaskRejectedException;
 import org.springframework.stereotype.Service;
 
 import com.todosimple.todosimple.models.User;
 import com.todosimple.todosimple.repositories.TaskRepository;
 import com.todosimple.todosimple.repositories.UserRepository;
-
-import jakarta.transaction.Transactional;
 
 @Service
 public class UserService {
@@ -29,7 +26,6 @@ public class UserService {
     public User createUser(User obj) {
         obj.setId(null);
         obj = this.userRepository.save(obj);
-        this.taskRepository.saveAll(obj.getTasks());
 
         return obj;
     }
