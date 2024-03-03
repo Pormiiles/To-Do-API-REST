@@ -15,7 +15,6 @@ import com.todosimple.todosimple.repositories.TaskRepository;
 public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
-
     @Autowired
     private UserService userService;
 
