@@ -28,7 +28,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Value("${server.error.include-exception}")
     private boolean printStackTrace;
 
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException methodArgumentNotValidException,
             HttpHeaders headers,

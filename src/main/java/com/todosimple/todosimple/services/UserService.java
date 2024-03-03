@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.todosimple.todosimple.models.User;
 import com.todosimple.todosimple.repositories.UserRepository;
+import com.todosimple.todosimple.services.exceptions.DataBindingViolationException;
+import com.todosimple.todosimple.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class UserService {
@@ -16,7 +18,7 @@ public class UserService {
     public User findById(Long id) {
         Optional<User> user = this.userRepository.findById(id);
 
-        return user.orElseThrow(() -> new RuntimeException("Usuário não encontrado! Id: " + id + ", Tipo: " + User.class.getName()));
+        return user.orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado! Id: " + id + ", Tipo: " + User.class.getName()));
     }
     
     @org.springframework.transaction.annotation.Transactional
@@ -41,7 +43,7 @@ public class UserService {
         try {
             this.userRepository.deleteById(id);
         } catch (Exception e) {
-            throw new RuntimeException("Não foi possível deletar o usuário (Há entidades relacionadas)!");
+            throw new DataBindingViolationException("Não foi possível deletar o usuário (Há entidades relacionadas)!");
         }
     }
 }
